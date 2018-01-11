@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Switzer Train Search</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="submit">Submit</string>
+    <string name="welcome">Welcome</string>
+    <string name="switzerland_train_search">Switzerland Train Search</string>
+    <string name="to">to</string>
+</resources>
