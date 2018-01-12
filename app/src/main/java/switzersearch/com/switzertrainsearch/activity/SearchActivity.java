@@ -20,7 +20,9 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import switzersearch.com.switzertrainsearch.R;
@@ -132,8 +134,8 @@ public class SearchActivity extends AppCompatActivity {
                         String mDepart= null;
                         String mArr= null;
                         if (fromObj.getStation()!=null || toObj.getStation()!=null) {
-                            mDepart = "Platform: "+fromObj.getPlatform()+"\n\n Station Name: "+fromObj.getStation().getName()+"\n\n Departure Time: "+TimeStampToDate(fromObj.getDepartureTimestamp());
-                            mArr = "Platform: "+toObj.getPlatform()+"\n\n Station Name: "+toObj.getStation().getName()+"\n\n  Arrival Time: "+TimeStampToDate(toObj.getArrivalTimestamp());
+                            mDepart = "Platform: "+fromObj.getPlatform()+"\n\n Station Name: "+fromObj.getStation().getName()+"\n\n Departure Time: "+getLocalTime(fromObj.getDeparture());
+                            mArr = "Platform: "+toObj.getPlatform()+"\n\n Station Name: "+toObj.getStation().getName()+"\n\n  Arrival Time: "+getLocalTime(toObj.getArrival());
                             mDepart=mDepart.replace("null","Not Available");
                             mArr=mArr.replace("null","Not Available");
                             mTvDepart.setText(mDepart);
@@ -160,7 +162,7 @@ public class SearchActivity extends AppCompatActivity {
         // AppContoller.getInstance().addToRequestQueue(jsonArrayRequest);
     }
 
-    private String TimeStampToDate(Long ts)
+    private String TimeStampToDate(String ts)
     {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
         return formatter.format(ts);
@@ -173,5 +175,23 @@ public class SearchActivity extends AppCompatActivity {
         if(ConnectionResult!=null)
             DBHelper.writeToSQLDB(dbWrite, ConnectionResult);
         dbWrite.close();
+    }
+
+    public String getLocalTime(String OurDate) {
+        String formattedTime = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(  "yyyy-MM-dd'T'HH:mm:ss'+'HH:MM");   //"2012-03-31T08:58:00+02:00",
+            SimpleDateFormat output = new SimpleDateFormat("EEEE, dd MMM yyyy");
+            Date d = null;
+            try {
+                d = sdf.parse(OurDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            formattedTime = output.format(d);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return formattedTime;
     }
 }
