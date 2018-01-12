@@ -4,56 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="switzersearch.com.switzertrainsearch.SplashActivity"
+    tools:context="switzersearch.com.switzertrainsearch.activity.SplashActivity"
     android:background="@drawable/train_search_splash_screen">
-
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="201dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="124dp"
-        android:text="@string/welcome"
-        android:textAlignment="center"
-        android:textColor="#ffffff"
-        android:textSize="35sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/to"
-        android:layout_width="95dp"
-        android:layout_height="37dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome"
-        android:textSize="25sp"
-        android:text="@string/to"
-        android:textColor="#ffffff"/>
 
     <TextView
         android:id="@+id/tv_sts"
         style="@style/Animation.AppCompat.DropDownUp"
         android:layout_width="374dp"
         android:layout_height="66dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/switzerland_train_search"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.277" />
 
 </android.support.constraint.ConstraintLayout>

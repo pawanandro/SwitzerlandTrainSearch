@@ -6,4 +6,22 @@
     <string name="welcome">Welcome</string>
     <string name="switzerland_train_search">Switzerland Train Search</string>
     <string name="to">to</string>
+    <string name="googlelogin">GoogleLogin</string>
+    <string name="favourite">Favourite</string>
+    <string name="logged_in">Logged In</string>
+    <string name="login_error">Please Check Your TokenID</string>
+    <string name="facebook_app_id">1671329073123097</string>
+    <string name="arrival">Arrival</string>
+    <string name="depart">Depart</string>
+    <string name="search">Search</string>
+    <string name="from">From</string>
+    <string name="make_it_your_favourite">Make it Your Favourite</string>
+    <string name="departure">Departure:</string>
+    <string name="name">Name</string>
+    <string name="arrival_name">Arrival Name</string>
+    <string name="time_and_platform">Time and platform</string>
+    <string name="_10">10</string>
+    <string name="arrival1">Arrival:</string>
+    <string name="image">Image</string>
+    <string name="image1">image</string>
 </resources>

@@ -1,4 +1,4 @@
-package switzersearch.com.switzertrainsearch;
+package switzersearch.com.switzertrainsearch.activity;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+
+import switzersearch.com.switzertrainsearch.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -36,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 }
             }
-        }, 5000);
+        }, 3000);
     }
 
 }
