@@ -1,9 +1,12 @@
 package switzersearch.com.switzertrainsearch.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +27,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import switzersearch.com.switzertrainsearch.R;
 import switzersearch.com.switzertrainsearch.data.DBHelper;
@@ -53,6 +55,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 callSearch();
+                InputMethodManager inputManager = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                if (inputManager != null) {
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                }
             }
         });
 
@@ -135,8 +144,8 @@ public class SearchActivity extends AppCompatActivity {
                         String mDepart= null;
                         String mArr= null;
                         if (fromObj.getStation()!=null || toObj.getStation()!=null) {
-                            mDepart = "Platform: "+fromObj.getPlatform()+"\n\n Station Name: "+fromObj.getStation().getName()+"\n\n Departure Time: "+TimeStampToDate(fromObj.getDepartureTimestamp());
-                            mArr = "Platform: "+toObj.getPlatform()+"\n\n Station Name: "+toObj.getStation().getName()+"\n\n  Arrival Time: "+TimeStampToDate(toObj.getArrivalTimestamp());
+                            mDepart = "Platform: "+fromObj.getPlatform()+"\n\n Station Name: "+fromObj.getStation().getName()+"\n\n Departure Time: "+ timeStampToDate(fromObj.getDepartureTimestamp());
+                            mArr = "Platform: "+toObj.getPlatform()+"\n\n Station Name: "+toObj.getStation().getName()+"\n\n  Arrival Time: "+ timeStampToDate(toObj.getArrivalTimestamp());
                             mDepart=mDepart.replace("null","Not Available");
                             mArr=mArr.replace("null","Not Available");
                             mTvDepart.setText(mDepart);
@@ -163,10 +172,11 @@ public class SearchActivity extends AppCompatActivity {
         // AppContoller.getInstance().addToRequestQueue(jsonArrayRequest);
     }
 
-    private String TimeStampToDate(Long ts)
+    private String timeStampToDate(Long ts)
     {
         Timestamp timestamp = new Timestamp(ts);
         Date dt = new Date(timestamp.getTime());
+        String date=dt.toString().replace("GMT+5:30 1970","");
         return dt.toString();
     }
 
@@ -184,8 +194,8 @@ public class SearchActivity extends AppCompatActivity {
         String formattedTime = null;
         try {
             System.out.println("OurDate:"+OurDate);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
-            SimpleDateFormat output = new SimpleDateFormat("EEEE, dd MMM yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat output = new SimpleDateFormat("EEEE, dd MMM yyyy");
             Date d = null;
             try {
                 d = sdf.parse(OurDate);
