@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -134,8 +135,8 @@ public class SearchActivity extends AppCompatActivity {
                         String mDepart= null;
                         String mArr= null;
                         if (fromObj.getStation()!=null || toObj.getStation()!=null) {
-                            mDepart = "Platform: "+fromObj.getPlatform()+"\n\n Station Name: "+fromObj.getStation().getName()+"\n\n Departure Time: "+getLocalTime(fromObj.getDeparture());
-                            mArr = "Platform: "+toObj.getPlatform()+"\n\n Station Name: "+toObj.getStation().getName()+"\n\n  Arrival Time: "+getLocalTime(toObj.getArrival());
+                            mDepart = "Platform: "+fromObj.getPlatform()+"\n\n Station Name: "+fromObj.getStation().getName()+"\n\n Departure Time: "+TimeStampToDate(fromObj.getDepartureTimestamp());
+                            mArr = "Platform: "+toObj.getPlatform()+"\n\n Station Name: "+toObj.getStation().getName()+"\n\n  Arrival Time: "+TimeStampToDate(toObj.getArrivalTimestamp());
                             mDepart=mDepart.replace("null","Not Available");
                             mArr=mArr.replace("null","Not Available");
                             mTvDepart.setText(mDepart);
@@ -162,11 +163,13 @@ public class SearchActivity extends AppCompatActivity {
         // AppContoller.getInstance().addToRequestQueue(jsonArrayRequest);
     }
 
-    private String TimeStampToDate(String ts)
+    private String TimeStampToDate(Long ts)
     {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
-        return formatter.format(ts);
+        Timestamp timestamp = new Timestamp(ts);
+        Date dt = new Date(timestamp.getTime());
+        return dt.toString();
     }
+
 
     private void addToFavouriteList()
     {
@@ -180,7 +183,8 @@ public class SearchActivity extends AppCompatActivity {
     public String getLocalTime(String OurDate) {
         String formattedTime = null;
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat(  "yyyy-MM-dd'T'HH:mm:ss'+'HH:MM");   //"2012-03-31T08:58:00+02:00",
+            System.out.println("OurDate:"+OurDate);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
             SimpleDateFormat output = new SimpleDateFormat("EEEE, dd MMM yyyy");
             Date d = null;
             try {
